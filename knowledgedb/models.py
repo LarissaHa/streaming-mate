@@ -41,19 +41,19 @@ class Nation(models.Model):
 class Player(models.Model):
     firstname = models.CharField(max_length=120)
     lastname = models.CharField(max_length=120)
-    birthdate = models.DateField(blank=True)
-    playing_since = models.DateField(blank=True)
+    birthdate = models.DateField(null=True, blank=True)
+    playing_since = models.DateField(null=True, blank=True)
     eura_pro = models.BooleanField()
     hometeam = models.CharField(max_length=120, blank=True)
     speciality = models.TextField(blank=True)
     achievements = models.TextField(blank=True)
-    normal_teammate = models.ManyToManyField("self", blank=True)
+    normal_teammate = models.ManyToManyField("self", null=True, blank=True)
 
     class Meta:
         constraints = [
             # Tweak uniqueness as needed for your data quality
             models.UniqueConstraint(
-                fields=["firstname", "lastname"],
+                fields=["firstname", "lastname", "birthdate"],
                 name="uq_player_name_dob",
                 deferrable=models.Deferrable.DEFERRED,
             )
