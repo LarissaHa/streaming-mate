@@ -41,13 +41,13 @@ class Nation(models.Model):
 class Player(models.Model):
     firstname = models.CharField(max_length=120)
     lastname = models.CharField(max_length=120)
-    birthdate = models.DateField()
-    playing_since = models.DateField()
+    birthdate = models.DateField(blank=True)
+    playing_since = models.DateField(blank=True)
     eura_pro = models.BooleanField()
-    hometeam = models.CharField(max_length=120)
-    speciality = models.CharField(max_length=200)
-    achievements = models.TextField()
-    normal_teammate = models.ManyToManyField("self")
+    hometeam = models.CharField(max_length=120, blank=True)
+    speciality = models.TextField(blank=True)
+    achievements = models.TextField(blank=True)
+    normal_teammate = models.ManyToManyField("self", blank=True)
 
     class Meta:
         constraints = [
@@ -67,7 +67,6 @@ class Player(models.Model):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=120)
     playerA = models.ForeignKey(
         Player, on_delete=models.CASCADE, related_name="teams_as_playerA"
     )
@@ -106,7 +105,7 @@ class Tournament(models.Model):
     end_date = models.DateField()
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     division = models.CharField(max_length=5, choices=Divisions)
 
     class Meta:
