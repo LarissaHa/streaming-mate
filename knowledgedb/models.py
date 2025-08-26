@@ -53,7 +53,7 @@ class Player(models.Model):
         constraints = [
             # Tweak uniqueness as needed for your data quality
             models.UniqueConstraint(
-                fields=["firstname", "lastname", "birthdate"],
+                fields=["firstname", "lastname"],
                 name="uq_player_name_dob",
                 deferrable=models.Deferrable.DEFERRED,
             )
