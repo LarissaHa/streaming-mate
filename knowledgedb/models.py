@@ -127,6 +127,7 @@ class Squad(models.Model):
         on_delete=models.PROTECT,              # avoid orphaning squads if a nation is removed
         related_name="squads",
     )
+    instagram = models.URLField(null=True, blank=True)
 
     # Convenience many-to-many (through table holds seed/order)
     teams = models.ManyToManyField(
