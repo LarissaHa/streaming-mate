@@ -30,7 +30,7 @@ class Nation(models.Model):
         constraints = [
             models.CheckConstraint(
                 name="ck_nation_short_upper",
-                check=Q(short__regex=r"^[A-Z]{2}$"),
+                check=Q(short__regex=r"^[A-Z]{3}$"),
             ),
         ]
 
