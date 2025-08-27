@@ -1,28 +1,40 @@
 {% extends 'knowledgedb/index.html' %}
 
 {% block content %}
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Nations</h4>
-            <!--<p class="card-description"></p>-->
-            <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                    {% for nation in nations %}
-                        <tr>
-                            <td class="py-1">
-                            {{ nation.flag_emoji }}
-                            </td>
-                            <td>
-                            <a href="{% url 'nations_detail' short=nation.short %}">{{ nation }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="home-tab">
+            <div class="tab-content tab-content-basic">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+                    <div class="row">
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Nations</h4>
+                                    <!--<p class="card-description"></p>-->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                {% for nation in nations %}
+                                                    <tr>
+                                                        <td class="py-1">
+                                                        {{ nation.flag_emoji }}
+                                                        </td>
+                                                        <td>
+                                                        <a href="{% url 'nations_detail' short=nation.short %}">{{ nation }}</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 {% endblock %}

@@ -71,6 +71,7 @@ def squads_detail(request, id):
         .filter(squad_teams__squad=squad)
         .annotate(seed=F("squad_teams__seed"))
         .select_related("playerA", "playerB")
+        .prefetch_related("playerA__normal_teammate", "playerB__normal_teammate")
         .order_by("seed")
     )
     return render(request, 'knowledgedb/squads_detail.html', {"squad": squad, "teams": teams})

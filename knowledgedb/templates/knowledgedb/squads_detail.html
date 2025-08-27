@@ -1,25 +1,106 @@
 {% extends 'knowledgedb/index.html' %}
 
 {% block content %}
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">{{ squad }}</h4>
-            <!--<p class="card-description"></p>-->
-            <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                    {% for t in teams %}
-                        <tr>
-                            <td class="py-1">
-                            {{ t }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+<div class="row">
+    <h2>{{ squad.nation.flag_emoji }} {{ squad }}</h2>
+    <h2> </h2>
+</div>
+
+{% for t in teams %}
+    <div class="row">
+        <h4>({{ t.seed }}) {{ t }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ t.playerA }}</h4>
+                    <p class="card-description">
+                    {% if t.playerA.eura_pro %}EURA PRO{% endif %}
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                                    <tr>
+                                        <td class="py-1">Playing since</td>
+                                        <td>{{ t.playerA.playing_since }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Home Team</td>
+                                        <td>{{ t.playerA.hometeam }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Speciality</td>
+                                        <td>{{ t.playerA.speciality }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Achievements</td>
+                                        <td>{{ t.playerA.achievements }}</td>
+                                    </tr>
+                                    {% with mates=t.playerA.normal_teammate.all %}
+                                    {% if mates %}
+                                    <tr>
+                                        <td class="py-1">Normal Teammates</td>
+                                        <td>
+                                            {% for mate in mates %}
+                                                {{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endwith %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ t.playerB }}</h4>
+                    <p class="card-description">
+                    {% if t.playerB.eura_pro %}EURA PRO{% endif %}
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                                    <tr>
+                                        <td class="py-1">Playing since</td>
+                                        <td>{{ t.playerB.playing_since }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Home Team</td>
+                                        <td>{{ t.playerB.hometeam }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Speciality</td>
+                                        <td>{{ t.playerB.speciality }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">Achievements</td>
+                                        <td>{{ t.playerB.achievements }}</td>
+                                    </tr>
+                                    {% with mates=t.playerB.normal_teammate.all %}
+                                    {% if mates %}
+                                    <tr>
+                                        <td class="py-1">Normal Teammates</td>
+                                        <td>
+                                            {% for mate in mates %}
+                                                {{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endwith %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+{% endfor %}
+
 {% endblock %}
