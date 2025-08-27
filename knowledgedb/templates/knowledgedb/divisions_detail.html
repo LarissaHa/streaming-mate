@@ -1,0 +1,25 @@
+{% extends 'knowledgedb/index.html' %}
+
+{% block content %}
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ division }}</h4>
+            <!--<p class="card-description"></p>-->
+            <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    {% for s in squads %}
+                        <tr>
+                            <td class="py-1">
+                            <a href="{% url 'squads_detail' id=s.id %}">{{ s }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

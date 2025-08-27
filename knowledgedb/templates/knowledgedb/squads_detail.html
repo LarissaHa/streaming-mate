@@ -4,18 +4,15 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Nations</h4>
+            <h4 class="card-title">{{ squad }}</h4>
             <!--<p class="card-description"></p>-->
             <div class="table-responsive">
             <table class="table table-striped">
                 <tbody>
-                    {% for nation in nations %}
+                    {% for t in teams %}
                         <tr>
                             <td class="py-1">
-                            {{ nation.flag_emoji }}
-                            </td>
-                            <td>
-                            <a href="{% url 'nation_detail' short=nation.short %}">{{ nation }}</a>
+                            {{ t }}
                             </td>
                         </tr>
                     {% endfor %}

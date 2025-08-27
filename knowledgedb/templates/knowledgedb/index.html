@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin2 </title>
+  <title>Streaming Mate</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
@@ -35,26 +35,21 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="index.html">
-            <img src="{% static 'images/logo.svg' %}" alt="logo" />
-          </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="{% static 'images/logo-mini.svg' %}" alt="logo" />
-          </a>
+          <p>Navigation</p>
         </div>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+            <h1 class="welcome-text">Streaming <span class="text-black fw-bold">Mate</span></h1>
+            <h3 class="welcome-sub-text">European Roundnet Championship 2025</h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
+            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Tournament </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a href="/admin/" class="dropdown-item preview-item">
+              <a href="/" class="dropdown-item preview-item">
                 <div class="preview-item-content flex-grow py-2">
                   <p class="preview-subject ellipsis font-weight-medium text-dark">EUROS 2025</p>
                   <p class="fw-light small-text mb-0">European Roundnet Championship 2025</p>
@@ -244,93 +239,29 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/nations">
               <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Nations</span>
             </a>
           </li>
-          <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">UI Elements</span>
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Divisions</span>
               <i class="menu-arrow"></i> 
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item nav-category">Forms and Datas</li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="menu-icon mdi mdi-card-text-outline"></i>
-              <span class="menu-title">Form elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/divisions/coed">Coed</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/divisions/women">Women</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/divisions/open">Open</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="menu-icon mdi mdi-chart-line"></i>
-              <span class="menu-title">Charts</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-              <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <i class="menu-icon mdi mdi-layers-outline"></i>
-              <span class="menu-title">Icons</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item nav-category">pages</li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" href="/admin/">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item nav-category">help</li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
+              <span class="menu-title">Admin</span>
             </a>
           </li>
         </ul>
@@ -341,7 +272,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="home-tab">
-                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                <!--<div class="d-sm-flex align-items-center justify-content-between border-bottom">
                   <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
@@ -363,10 +294,10 @@
                       <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="tab-content tab-content-basic">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
-                    <div class="row">
+                    <!--<div class="row">
                       <div class="col-sm-12">
                         <div class="statistics-details d-flex align-items-center justify-content-between">
                           <div>
@@ -401,12 +332,13 @@
                           </div>
                         </div>
                       </div>
-                    </div> 
+                    </div> -->
                     <div class="row">
                       {% block content %}
                       {% endblock %}
                     </div>
                     <div class="row">
+                      <!--
                       <div class="col-lg-8 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-12 grid-margin stretch-card">
@@ -775,6 +707,8 @@
                           </div>
                         </div>
                       </div>
+                      -->
+                      <!--
                       <div class="col-lg-4 d-flex flex-column">
                         <div class="row flex-grow">
                           <div class="col-12 grid-margin stretch-card">
@@ -785,7 +719,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                       <h4 class="card-title card-title-dash">Todo list</h4>
                                       <div class="add-items d-flex mb-0">
-                                        <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
+                                        <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
                                         <button class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i class="mdi mdi-plus"></i></button>
                                       </div>
                                     </div>
@@ -970,6 +904,7 @@
                           </div>
                         </div>
                       </div>
+                      -->
                     </div>
                   </div>
                 </div>
