@@ -9,6 +9,21 @@
             <!--<p class="card-description"></p>-->
             <div class="table-responsive">
             <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Nation</td>
+                        <td>Seed 1</td>
+                        <td>Seed 2</td>
+                        <td>Seed 3</td>
+                        <td>Seed 4</td>
+                        {% if division.lower == "coed" %}
+                        {% else %}
+                        <td>Seed 5</td>
+                        <td>Seed 6</td>
+                        {% endif %}
+                    </tr>
+                    
+                </thead>
                 <tbody>
                     {% for s in squads %}
                         <tr>
