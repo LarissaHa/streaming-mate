@@ -87,7 +87,7 @@ def divisions_detail(request, division_slug: str):
                     .order_by("seed"),
             )
         )
-        .order_by("tournament__start_date")
+        .order_by("tournament__start_date", "nation__name")
     )
     return render(
         request,
