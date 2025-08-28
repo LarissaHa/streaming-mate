@@ -16,6 +16,19 @@
                         </li>
                     {% endfor %}
                 </ul>
+                <h4 class="card-title">Context</h4>
+                <!--<p class="card-description"></p>-->
+                <ul class="list-arrow">
+                    <li>
+                        Instagram: <a href="{{ nation.instagram }}" target="_blank" rel="noopener noreferrer">Open on Instagram</a>
+                    </li>
+                    <li>
+                        Number of Pro Players in Roster: {{ eura_pro_count }}
+                    </li>
+                    <li>
+                        Additional Information: {{ nation.add_information }}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -29,7 +42,7 @@
                         <tbody>
                             {% for player in players %}
                                 <tr>
-                                    <td class="py-1">{{ player }}</td>
+                                    <td class="py-1">{% if player.eura_pro %}(*){% endif %} {{ player }}</td>
                                     {% for team in player.teams_in_nation %}
                                         <td>{{ team.division }}: {{ team.playerA }} &amp; {{ team.playerB }}</td>
                                     {% endfor %}

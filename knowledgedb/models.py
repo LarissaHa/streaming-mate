@@ -22,6 +22,8 @@ class Nation(models.Model):
     name = models.CharField(max_length=100)
     short = models.CharField(max_length=3, unique=True)   # e.g., "DEU"
     flag_emoji = models.CharField(max_length=8, blank=True) # "🇩🇪" etc.
+    instagram = models.URLField(null=True, blank=True)
+    add_information = models.TextField(blank=True)
 
     class Meta:
         indexes = [

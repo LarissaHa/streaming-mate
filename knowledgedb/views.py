@@ -48,6 +48,8 @@ def nations_detail(request, short):
         )
     )
 
+    eura_pro_count = players.filter(eura_pro=True).count()
+
     # Combine A/B teams into a single attribute per player (deduped, order preserved)
     players = list(players)  # evaluate so we can attach attributes
     for p in players:
@@ -64,7 +66,7 @@ def nations_detail(request, short):
     return render(
         request,
         "knowledgedb/nations_detail.html",
-        {"nation": nation, "players": players, "squads": squads},
+        {"nation": nation, "players": players, "squads": squads, "eura_pro_count": eura_pro_count},
     )
 
 def start(request):
