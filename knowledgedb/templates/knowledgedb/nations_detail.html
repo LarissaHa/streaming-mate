@@ -19,15 +19,19 @@
                 <h4 class="card-title">Context</h4>
                 <!--<p class="card-description"></p>-->
                 <ul class="list-arrow">
+                    {% if nation.instagram %}
                     <li>
                         Instagram: <a href="{{ nation.instagram }}" target="_blank" rel="noopener noreferrer">Open on Instagram</a>
                     </li>
+                    {% endif %}
                     <li>
                         Number of Pro Players in Roster: {{ eura_pro_count }}
                     </li>
+                    {% if nation.instagram %}
                     <li>
                         Additional Information: {{ nation.add_information }}
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
