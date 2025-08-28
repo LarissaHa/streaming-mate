@@ -17,11 +17,16 @@
                                             <tbody>
                                                 {% for nation in nations %}
                                                     <tr>
-                                                        <td class="py-1">
-                                                        {{ nation.flag_emoji }}
+                                                        <td>
+                                                            {{ nation.flag_emoji }}
                                                         </td>
                                                         <td>
-                                                        <a href="{% url 'nations_detail' short=nation.short %}">{{ nation }}</a>
+                                                            <a href="{% url 'nations_detail' short=nation.short %}">{{ nation }}</a>
+                                                        </td>
+                                                        <td>
+                                                        {% if nation.instagram %}
+                                                        <a href="{{ nation.instagram }}" target="_blank" rel="noopener noreferrer">Open on Instagram</a>
+                                                        {% endif %}
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
