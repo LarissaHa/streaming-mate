@@ -12,9 +12,12 @@
                 <tbody>
                     {% for s in squads %}
                         <tr>
-                            <td class="py-1">
-                            <a href="{% url 'squads_detail' id=s.id %}">{{ s }}</a>
-                            </td>
+                            <td class="py-1">{{ s.nation.flag_emoji }} <a href="{% url 'squads_detail' id=s.id %}">{{ s.nation }}</a></td>
+                            {% with teams=s.teams.all %}
+                                {% for t in teams %}
+                                <td>{{ t.playerA }}{% if t.playerA.eura_pro %}(*){% endif %} & {{ t.playerB }}{% if t.playerB.eura_pro %}(*){% endif %}</td>
+                                {% endfor %}
+                            {% endwith %}
                         </tr>
                     {% endfor %}
                 </tbody>

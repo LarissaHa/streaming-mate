@@ -15,7 +15,7 @@
                     {% for squad in squads %}
                         <tr>
                             <td class="py-1">
-                            <a href="{% url 'squads_detail' id=squad.id %}">{{ squad }}</a>
+                            <a href="{% url 'squads_detail' id=squad.id %}">{{ squad.tournament.get_division_display }}</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -35,9 +35,10 @@
                 <tbody>
                     {% for player in players %}
                         <tr>
-                            <td class="py-1">
-                            {{ player }}
-                            </td>
+                            <td class="py-1">{{ player }}</td>
+                            {% for team in player.teams_in_nation %}
+                                <td>{{ team.division }}: {{ team.playerA }} &amp; {{ team.playerB }}</td>
+                            {% endfor %}
                         </tr>
                     {% endfor %}
                 </tbody>

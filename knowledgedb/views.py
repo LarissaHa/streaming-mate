@@ -23,6 +23,16 @@ def nations_detail(request, short):
             )
         )
     )
+
+    # Base queryset of teams that actually appear in this nation's squads
+    teams_in_nation_qs = (
+        Team.objects
+        .filter(squad_teams__squad__nation=nation)
+        .select_related("playerA", "playerB")
+        .distinct()
+    )
+
+    # Players who appear in those teams (as you had), with prefetched teams
     players = (
         Player.objects
         .filter(
@@ -31,9 +41,30 @@ def nations_detail(request, short):
         )
         .distinct()
         .order_by("lastname", "firstname")
+        .prefetch_related(
+            Prefetch("teams_as_playerA", queryset=teams_in_nation_qs, to_attr="teams_as_A_in_nation"),
+            Prefetch("teams_as_playerB", queryset=teams_in_nation_qs, to_attr="teams_as_B_in_nation"),
+        )
     )
 
-    return render(request, 'knowledgedb/nations_detail.html', {'nation': nation, 'players': players, 'squads': squads})
+    # Combine A/B teams into a single attribute per player (deduped, order preserved)
+    players = list(players)  # evaluate so we can attach attributes
+    for p in players:
+        combined = []
+        seen = set()
+        for t in getattr(p, "teams_as_A_in_nation", []):
+            if t.pk not in seen:
+                combined.append(t); seen.add(t.pk)
+        for t in getattr(p, "teams_as_B_in_nation", []):
+            if t.pk not in seen:
+                combined.append(t); seen.add(t.pk)
+        p.teams_in_nation = combined  # <- use this in the template
+
+    return render(
+        request,
+        "knowledgedb/nations_detail.html",
+        {"nation": nation, "players": players, "squads": squads},
+    )
 
 def start(request):
     tournaments = Tournament.objects.order_by("name")
@@ -43,7 +74,6 @@ def divisions_detail(request, division_slug: str):
     division = division_slug.lower()
     if division not in Divisions.values:
         raise Http404("Unknown division")
-    print("hi")
     squads = (
         Squad.objects
         .filter(tournament__division=division)
@@ -58,7 +88,6 @@ def divisions_detail(request, division_slug: str):
         )
         .order_by("tournament__start_date")
     )
-    print(squads)
     return render(
         request,
         "knowledgedb/divisions_detail.html", {"division": division, "squads": squads},
