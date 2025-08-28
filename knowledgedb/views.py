@@ -3,6 +3,7 @@ from django.http import Http404
 from django.db.models import Q, Prefetch, F
 from .models import Divisions, Nation, Tournament, Player, Squad, SquadTeam, Team
 from django.shortcuts import render, get_object_or_404
+from .forms import SquadMatchForm
 
 def nations(request):
     nations = Nation.objects.order_by('name')
@@ -105,8 +106,50 @@ def squads_detail(request, id):
     )
     return render(request, 'knowledgedb/squads_detail.html', {"squad": squad, "teams": teams})
 
-def tournaments(request):
-    return render(request, 'knowledgedb/tournaments.html', {})
 
-def players(request):
-    return render(request, 'knowledgedb/players.html', {})
+def squad_match_view(request):
+    """
+    Pick two squads and see seed-vs-seed pairings.
+    Also supports GET ?s1=<id>&s2=<id> for shareable links.
+    """
+    initial = {}
+    s1 = request.GET.get("s1")
+    s2 = request.GET.get("s2")
+    if s1 and s2 and request.method == "GET":
+        initial = {"squad1": s1, "squad2": s2}
+
+    form = SquadMatchForm(request.POST or None, initial=initial)
+
+    matchups = None
+    squad1 = squad2 = None
+
+    if form.is_valid():
+        squad1 = form.cleaned_data["squad1"]
+        squad2 = form.cleaned_data["squad2"]
+
+        # Fetch entries ordered by seed, with teams + players
+        st1_qs = (SquadTeam.objects
+                  .filter(squad=squad1)
+                  .select_related("team", "team__playerA", "team__playerB")
+                  .order_by("seed"))
+        st2_qs = (SquadTeam.objects
+                  .filter(squad=squad2)
+                  .select_related("team", "team__playerA", "team__playerB")
+                  .order_by("seed"))
+
+        m1 = {st.seed: st for st in st1_qs}
+        m2 = {st.seed: st for st in st2_qs}
+        all_seeds = sorted(set(m1) | set(m2))
+
+        # Build display rows: one per seed
+        matchups = [{
+            "seed": seed,
+            "a": m1.get(seed),  # SquadTeam (may be None)
+            "b": m2.get(seed),  # SquadTeam (may be None)
+        } for seed in all_seeds]
+
+    return render(
+        request,
+        "knowledgedb/squad_match.html",
+        {"form": form, "matchups": matchups, "squad1": squad1, "squad2": squad2},
+    )

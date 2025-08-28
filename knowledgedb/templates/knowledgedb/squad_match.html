@@ -1,0 +1,121 @@
+{% extends 'knowledgedb/index.html' %}
+
+{% block content %}
+<h1>Squad Matchups</h1>
+<br>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Choose Opponents</h4>
+                <form method="post" class="mb-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary me-2">Match</button>
+                <a href="/squads/match/" class="btn btn-light">Clear</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% if matchups %}
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h2>
+                    {{ squad1.nation.flag_emoji }} {{ squad1.nation }} ({{ squad1.tournament.division }})
+                    vs
+                    {{ squad2.nation.flag_emoji }} {{ squad2.nation }} ({{ squad2.tournament.division }})
+                </h2>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Seed</th>
+                        <th>{{ squad1.nation }}</th>
+                        <th></th>
+                        <th>vs</th>
+                        <th>{{ squad2.nation }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in matchups %}
+                    <tr>
+                        <td>#{{ row.seed }}</td>
+                        <td>
+                            {% if row.a %}
+                                <b>{{ row.a.team }}</b><br><br>
+                                {{ row.a.team.playerA }}{% if row.a.team.playerA.eura_pro %}(*){% endif %}<br>
+                                <ul class="list-arrow">
+                                    <li>Home Team: {{ row.a.team.playerA.hometeam }}</li>
+                                    <li>Speciality: {{ row.a.team.playerA.speciality }}</li>
+                                    <li>Achievements: {{ row.a.team.playerA.achievements }}</li>
+                                    {% with mates=row.a.team.playerA.normal_teammate.all %}
+                                    <li>Normal Teammates: {% for mate in mates %}{{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+                                    {% endwith %}
+                                </ul>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if row.a %}
+                            <br><br>
+                            {{ row.a.team.playerB }}{% if row.a.team.playerB.eura_pro %}(*){% endif %}<br>
+                                <ul class="list-arrow">
+                                    <li>Home Team: {{ row.a.team.playerB.hometeam }}</li>
+                                    <li>Speciality: {{ row.a.team.playerB.speciality }}</li>
+                                    <li>Achievements: {{ row.a.team.playerB.achievements }}</li>
+                                    {% with mates=row.a.team.playerB.normal_teammate.all %}
+                                    <li>Normal Teammates: {% for mate in mates %}{{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+                                    {% endwith %}
+                                </ul>
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>×</td>
+                                                <td>
+                            {% if row.b %}
+                                <b>{{ row.b.team }}</b><br><br>
+                                {{ row.b.team.playerA }}{% if row.b.team.playerA.eura_pro %}(*){% endif %}<br>
+                                <ul class="list-arrow">
+                                    <li>Home Team: {{ rrow.b.team.playerA.hometeam }}</li>
+                                    <li>Speciality: {{ row.b.team.playerA.speciality }}</li>
+                                    <li>Achievements: {{ row.b.team.playerA.achievements }}</li>
+                                    {% with mates=row.b.team.playerA.normal_teammate.all %}
+                                    <li>Normal Teammates: {% for mate in mates %}{{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+                                    {% endwith %}
+                                </ul>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if row.b %}
+                            <br><br>
+                            {{ row.b.team.playerB }}{% if row.b.team.playerB.eura_pro %}(*){% endif %}<br>
+                                <ul class="list-arrow">
+                                    <li>Home Team: {{ row.b.team.playerB.hometeam }}</li>
+                                    <li>Speciality: {{ row.b.team.playerB.speciality }}</li>
+                                    <li>Achievements: {{ row.b.team.playerB.achievements }}</li>
+                                    {% with mates=row.b.team.playerB.normal_teammate.all %}
+                                    <li>Normal Teammates: {% for mate in mates %}{{ mate.firstname }} {{ mate.lastname }}{% if not forloop.last %}, {% endif %}{% endfor %}</li>
+                                    {% endwith %}
+                                </ul>
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a href="{% url 'squad-match' %}?s1={{ squad1.id }}&s2={{ squad2.id }}" class="btn btn-primary text-white me-0"><i class="icon-share"></i> Create Link to share</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
