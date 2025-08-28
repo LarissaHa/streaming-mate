@@ -2,26 +2,16 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-lg-12 grid-margin stretch-card">
+    {% for t in tournaments %}
+    <div class="col-lg-4 grid-margin stretch-card">
         <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Divisions</h4>
-            <!--<p class="card-description"></p>-->
-            <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                    {% for t in tournaments %}
-                        <tr>
-                            <td class="py-1">
-                            <a href="{% url 'divisions_detail' division_slug=t.division %}">{{ t }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="card-body">
+                <h4 class="card-title"><a href="{% url 'divisions_detail' division_slug=t.division %}">{{ t }}</a></h4>
+                <!--<p class="card-description"></p>-->
+                <a href="/squads/match/" class="btn btn-primary">Match!</a>
             </div>
         </div>
-        </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}
