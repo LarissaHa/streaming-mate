@@ -11,6 +11,18 @@ class SquadMatchForm(forms.Form):
         queryset=Squad.objects.select_related("tournament", "nation").order_by("tournament__start_date"),
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        def fmt(s):
+            # shows “Coed — Germany”
+            return f"{s.tournament.get_division_display()} — {s.nation.name}"
+            # optional fancier version with tournament/date:
+            # return f"{s.tournament.get_division_display()} — {s.nation.name} ({s.tournament.name})"
+
+        self.fields["squad1"].label_from_instance = fmt
+        self.fields["squad2"].label_from_instance = fmt
+
     def clean(self):
         cleaned = super().clean()
         s1 = cleaned.get("squad1")
