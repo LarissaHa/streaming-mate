@@ -12,7 +12,8 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary me-2">Match</button>
-                <a href="/squads/match/" class="btn btn-light">Clear</a>
+                <a href="/squads/match/" class="btn btn-inverse-primary">Clear</a>
+                {% if matchups %}<a href="{% url 'squad-match' %}?s1={{ squad1.id }}&s2={{ squad2.id }}" class="btn btn-inverse-primary"><i class="icon-share"></i> Create Link to share</a>{% endif %}
                 </form>
             </div>
         </div>
@@ -49,6 +50,7 @@
                                 <b>{{ row.a.team }}</b><br><br>
                                 {{ row.a.team.playerA }}{% if row.a.team.playerA.eura_pro %}(*){% endif %}<br>
                                 <ul class="list-arrow">
+                                    <li>Playing since: {{ row.a.team.playerA.playing_since }}</li>
                                     <li>Home Team: {{ row.a.team.playerA.hometeam }}</li>
                                     <li>Speciality: {{ row.a.team.playerA.speciality }}</li>
                                     <li>Achievements: {{ row.a.team.playerA.achievements }}</li>
@@ -65,6 +67,7 @@
                             <br><br>
                             {{ row.a.team.playerB }}{% if row.a.team.playerB.eura_pro %}(*){% endif %}<br>
                                 <ul class="list-arrow">
+                                    <li>Playing since: {{ row.a.team.playerB.playing_since }}</li>
                                     <li>Home Team: {{ row.a.team.playerB.hometeam }}</li>
                                     <li>Speciality: {{ row.a.team.playerB.speciality }}</li>
                                     <li>Achievements: {{ row.a.team.playerB.achievements }}</li>
@@ -81,6 +84,7 @@
                                 <b>{{ row.b.team }}</b><br><br>
                                 {{ row.b.team.playerA }}{% if row.b.team.playerA.eura_pro %}(*){% endif %}<br>
                                 <ul class="list-arrow">
+                                    <li>Playing since: {{ row.b.team.playerA.playing_since }}</li>
                                     <li>Home Team: {{ rrow.b.team.playerA.hometeam }}</li>
                                     <li>Speciality: {{ row.b.team.playerA.speciality }}</li>
                                     <li>Achievements: {{ row.b.team.playerA.achievements }}</li>
@@ -97,6 +101,7 @@
                             <br><br>
                             {{ row.b.team.playerB }}{% if row.b.team.playerB.eura_pro %}(*){% endif %}<br>
                                 <ul class="list-arrow">
+                                    <li>Playing since: {{ row.b.team.playerB.playing_since }}</li>
                                     <li>Home Team: {{ row.b.team.playerB.hometeam }}</li>
                                     <li>Speciality: {{ row.b.team.playerB.speciality }}</li>
                                     <li>Achievements: {{ row.b.team.playerB.achievements }}</li>
@@ -111,8 +116,6 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <br>
-                <a href="{% url 'squad-match' %}?s1={{ squad1.id }}&s2={{ squad2.id }}" class="btn btn-primary text-white me-0"><i class="icon-share"></i> Create Link to share</a>
             </div>
         </div>
     </div>
